@@ -233,6 +233,3 @@ Special thanks to the DHA PMO Portal development team.
 
 ---
 
-**Built for the Defense Health Agency**
-
-*Version 0.0.1-SNAPSHOT*
