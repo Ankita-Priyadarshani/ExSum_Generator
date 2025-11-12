@@ -110,7 +110,6 @@ pnpm dev
 
 2. **Select AI Model and Vector Database**
    - Choose your preferred LLM model from available options
-   - Select a vector database for RAG functionality
 
 3. **Generate Summary**
    - Click "Generate" to create the executive summary
