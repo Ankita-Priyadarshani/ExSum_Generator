@@ -72,21 +72,6 @@ cd assets/exsum-generator-be
 mvn clean install
 ```
 
-### Python Dependencies (for AI models)
-```bash
-pip install Dataset
-pip install text_generation
-```
-
-### SEMOSS Configuration
-Add to your SEMOSS instance's `RDF_Map.prop` file:
-```properties
-# Moose Model Configuration
-MOOSE_MODEL guanaco
-MOOSE_ENDPOINT https://play.semoss.org/moose
-GUANACO_ENDPOINT https://play.semoss.org/moose/guanaco/
-```
-
 ---
 
 ## Configuration
@@ -170,30 +155,21 @@ cd ../exsum-generator-be
 mvn clean package
 ```
 
-### Upload to Govconnect.ai
+### Deploy to Govconnect.ai
 
-- Log in to Govconnect.ai portal
-- Navigate to "Create New App"
-- Upload the compressed package including:
-  - `portals/` directory (built frontend assets)
-  - `assets/` directory
-  - `ExSum Generator Dev_dependencies.json`
-  - `ExSum Generator Dev_metadata.json`
-  - `ExSum Generator Dev__[id].smss` file
-- Configure environment variables (MODULE, ACCESS_KEY, SECRET_KEY, APP)
-- Set app permissions and access controls
-- Test the application in staging environment
-- Publish to production
+1. Log in to Govconnect.ai portal
+2. Navigate to "Create New App"
+3. Upload the compressed deployment package
+4. Configure environment variables (MODULE, ACCESS_KEY, SECRET_KEY, APP)
+5. Set app permissions and access controls
+6. Test the application in staging environment
+7. Publish to production
 
 ---
 
 ## Contributing
 
-We welcome contributions to improve the ExSum Generator! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on:
-- Code of conduct
-- Development workflow
-- Coding standards
-- How to submit pull requests
+We welcome contributions to improve the ExSum Generator! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on the development workflow and coding standards.
 
 ---
 
@@ -229,7 +205,4 @@ This project is built using the following technologies:
 - **[Webpack](https://webpack.js.org)** - Module bundler
 - **[pnpm](https://pnpm.io)** - Package manager
 
-Special thanks to the DHA PMO Portal development team.
-
 ---
-
