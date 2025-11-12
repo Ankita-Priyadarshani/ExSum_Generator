@@ -1,36 +1,31 @@
 # Contributing to ExSum Generator
 
-Thank you for your interest in contributing to the ExSum Generator! We welcome contributions from the community to help improve this project.
+Thank you for your interest in contributing to the ExSum Generator! We welcome bug reports and pull requests to help improve this project.
 
 ---
 
 ## Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
-- [How Can I Contribute?](#how-can-i-contribute)
-  - [Reporting Bugs](#reporting-bugs)
-  - [Suggesting Enhancements](#suggesting-enhancements)
-  - [Pull Requests](#pull-requests)
+- [Basics](#basics)
 - [Development Workflow](#development-workflow)
-- [Coding Standards](#coding-standards)
-- [Commit Guidelines](#commit-guidelines)
-- [Testing](#testing)
-- [Documentation](#documentation)
+- [Testing Your Work](#testing-your-work)
+- [Write Documentation](#write-documentation)
+- [Releasing a New Version](#releasing-a-new-version)
 
 ---
 
-## Code of Conduct
+## Basics
 
-This project is developed for the Defense Health Agency and all contributors are expected to maintain professional conduct. By participating, you agree to:
-
-- Be respectful and inclusive in all interactions
-- Accept constructive criticism gracefully
-- Focus on what is best for the project and the DHA
-- Show empathy towards other community members
+1. Create an issue and describe your idea
+2. Fork the repository
+3. Create your feature branch (`git checkout -b my-new-feature`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Publish the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
 
 ---
 
-## How Can I Contribute?
+## Development Workflow
 
 ### Reporting Bugs
 
@@ -86,25 +81,7 @@ Pull requests are the best way to contribute code. Please follow these steps:
 
 ## Development Workflow
 
-### 1. Fork and Clone
-
-```bash
-# Fork the repository on GitHub, then clone your fork
-git clone https://github.com/your-username/exsum-generator.git
-cd exsum-generator
-```
-
-### 2. Create a Branch
-
-```bash
-# Create a new branch for your feature or fix
-git checkout -b feature/your-feature-name
-
-# Or for bug fixes
-git checkout -b fix/bug-description
-```
-
-### 3. Set Up Development Environment
+### Step 1: Install Requirements
 
 ```bash
 # Install frontend dependencies
@@ -120,312 +97,111 @@ pip install Dataset
 pip install text_generation
 ```
 
-### 4. Make Your Changes
+### Step 2: Set Up SEMOSS Configuration
 
-- Write clean, readable code
-- Follow existing code structure and patterns
-- Add comments for complex logic
-- Keep changes focused and atomic
+Add to your SEMOSS instance's `RDF_Map.prop` file:
+```properties
+MOOSE_MODEL guanaco
+MOOSE_ENDPOINT https://play.semoss.org/moose
+GUANACO_ENDPOINT https://play.semoss.org/moose/guanaco/
+```
 
-### 5. Test Your Changes
+### Step 3: Run & Debug
 
 ```bash
-# Run linter
+# Start development server
+cd assets/client
+pnpm dev
+
+# Application will be available at http://localhost:3000
+```
+
+### Step 4: Test It
+
+```bash
+# Lint code
 pnpm lint
 
-# Run type checking
+# Type check
 pnpm type-check
 
-# Build the project
+# Build frontend
 pnpm build
 
-# Test the backend
+# Build backend
 cd ../exsum-generator-be
-mvn test
+mvn clean package
 ```
 
-### 6. Commit Your Changes
+---
+
+## Testing Your Work
+
+You can test your changes by running the application locally and verifying:
+
+- The application builds without errors
+- Linting passes: `pnpm lint`
+- Type checking passes: `pnpm type-check`
+- The workflow functions as expected
+- No regressions in existing features
 
 ```bash
-# Stage your changes
-git add .
-
-# Commit with a meaningful message
-git commit -m "feat: Add support for DOCX file uploads"
-```
-
-### 7. Push and Create Pull Request
-
-```bash
-# Push to your fork
-git push origin feature/your-feature-name
-
-# Create a Pull Request on GitHub
-```
-
----
-
-## Coding Standards
-
-### TypeScript/JavaScript
-
-- Use TypeScript for type safety
-- Follow ESLint and Prettier configurations
-- Use meaningful variable and function names
-- Avoid any types; use proper typing
-- Keep functions small and focused
-- Use async/await over promises
-
-**Example:**
-```typescript
-// Good
-async function generateSummary(documentId: string, modelId: string): Promise<Summary> {
-    const document = await fetchDocument(documentId);
-    const result = await insight.runPixel(`LLM(model=["${modelId}"])`);
-    return parseSummary(result);
-}
-
-// Bad
-function generateSummary(documentId, modelId) {
-    // Complex nested callbacks
-}
-```
-
-### React Components
-
-- Use functional components with hooks
-- Keep components small and reusable
-- Use proper prop types
-- Extract complex logic into custom hooks
-- Use Material UI components consistently
-
-**Example:**
-```typescript
-interface DocumentUploaderProps {
-    onUpload: (file: File) => void;
-    acceptedFormats: string[];
-}
-
-const DocumentUploader: React.FC<DocumentUploaderProps> = ({ onUpload, acceptedFormats }) => {
-    // Component logic
-    return <div>...</div>;
-};
-```
-
-### Java
-
-- Follow Java 8 conventions
-- Use meaningful class and method names
-- Add Javadoc comments for public methods
-- Keep methods focused on single responsibility
-- Handle exceptions appropriately
-
-### Code Formatting
-
-- Use 4 spaces for indentation (Java)
-- Use 2 spaces for indentation (TypeScript/JavaScript)
-- Maximum line length: 100 characters
-- Use single quotes for strings in JavaScript/TypeScript
-- Run `pnpm format` before committing
-
----
-
-## Commit Guidelines
-
-Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
-
-### Format
-
-```
-<type>(<scope>): <subject>
-
-<body>
-
-<footer>
-```
-
-### Types
-
-- **feat**: New feature
-- **fix**: Bug fix
-- **docs**: Documentation changes
-- **style**: Code style changes (formatting, no logic change)
-- **refactor**: Code refactoring
-- **test**: Adding or updating tests
-- **chore**: Build process or auxiliary tool changes
-
-### Examples
-
-```bash
-feat(upload): Add support for DOCX file uploads
-
-Added DOCX parsing capability to the document uploader.
-Files up to 50MB are now supported.
-
-Closes #123
-
----
-
-fix(generation): Fix summary generation timeout
-
-Increased timeout for LLM requests from 30s to 60s
-to handle larger documents.
-
-Fixes #456
-
----
-
-docs(readme): Update installation instructions
-
-Added detailed steps for Windows users and
-troubleshooting section for common errors.
-```
-
----
-
-## Testing
-
-### Before Submitting
-
-Ensure your code passes all checks:
-
-```bash
-# Lint your code
+# Run checks
 pnpm lint
-
-# Check types
 pnpm type-check
-
-# Build the project
 pnpm build
 
-# Test backend
+# Backend build
 cd assets/exsum-generator-be
-mvn test
-mvn package
+mvn clean package
 ```
-
-### Testing Guidelines
-
-- Test on multiple browsers (Chrome, Firefox, Edge)
-- Test with different file types and sizes
-- Test error scenarios
-- Verify backward compatibility
-- Test the full workflow end-to-end
 
 ---
 
-## Documentation
+## Write Documentation
 
-### Update Documentation
+This project has documentation in a few places:
 
-When making changes that affect usage:
+### README.md
+The main README provides an overview, installation instructions, and usage guidelines. Update this file when adding major features or changing how the application works.
 
-- Update README.md if necessary
-- Update code comments
-- Update `_PMO_Documentation.pptx` for major features
-- Add JSDoc comments for new functions/components
+### Code Comments
+Add clear comments for complex logic. Use JSDoc style for functions and components:
 
-### Documentation Style
-
-- Use clear, concise language
-- Provide examples where helpful
-- Keep documentation up to date with code changes
-- Use proper Markdown formatting
-
-**Example:**
 ```typescript
 /**
  * Uploads a document and initiates summary generation
  * 
  * @param file - The document file to upload (PDF, DOCX, or TXT)
  * @param modelId - The ID of the LLM model to use
- * @param vectorDBId - The ID of the vector database for RAG
  * @returns Promise resolving to the generated summary
- * @throws {Error} If file format is not supported or upload fails
  */
-async function uploadAndGenerate(
-    file: File, 
-    modelId: string, 
-    vectorDBId: string
-): Promise<Summary> {
+async function uploadAndGenerate(file: File, modelId: string): Promise<Summary> {
     // Implementation
 }
 ```
 
----
-
-## Pull Request Process
-
-### Before Submitting
-
-1. ✅ Branch is up to date with main
-2. ✅ All tests pass
-3. ✅ Code is linted and formatted
-4. ✅ Documentation is updated
-5. ✅ Commit messages follow guidelines
-6. ✅ Changes are focused and atomic
-
-### PR Description Template
-
-```markdown
-## Description
-Brief description of changes
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation update
-- [ ] Refactoring
-
-## Testing
-How has this been tested?
-
-## Checklist
-- [ ] Code follows style guidelines
-- [ ] Self-review completed
-- [ ] Comments added for complex code
-- [ ] Documentation updated
-- [ ] No new warnings generated
-- [ ] Tests added/updated
-- [ ] All tests passing
-
-## Screenshots (if applicable)
-
-## Related Issues
-Closes #issue_number
-```
-
-### Review Process
-
-- PRs require review from at least one maintainer
-- Address all review comments
-- Keep the PR updated with the main branch
-- Be responsive to feedback
-- Squash commits if requested
+### _PMO_Documentation.pptx
+For major features or architectural changes, update the comprehensive documentation in the project root.
 
 ---
 
-## Questions?
+## Releasing a New Version
 
-If you have questions about contributing:
-
-1. Check existing documentation in `_PMO_Documentation.pptx`
-2. Review closed issues and PRs for similar discussions
-3. Contact the development team
-4. Open a discussion issue for general questions
+1. Ensure all tests pass and the build is successful
+2. Update version number in `package.json` and `pom.xml`
+3. Create a Git tag: `git tag -a v0.1.0 -m "Release version 0.1.0"`
+4. Push the changes: `git push`
+5. Push the tag: `git push --tags`
+6. Build the application:
+   ```bash
+   cd assets/client
+   pnpm build
+   
+   cd ../exsum-generator-be
+   mvn clean package
+   ```
+7. Create deployment package with required files
+8. Deploy to Govconnect.ai following deployment instructions in README.md
 
 ---
-
-## Recognition
-
-Contributors will be acknowledged in:
-- Release notes for their contributions
-- The project documentation
-- Special recognition for significant contributions
-
----
-
-Thank you for contributing to ExSum Generator! Your efforts help improve this tool for the Defense Health Agency.
-
-**Built for the Defense Health Agency**
