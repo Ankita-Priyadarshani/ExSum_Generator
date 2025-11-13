@@ -104,7 +104,7 @@ pnpm dev
 ### Workflow
 
 1. **Upload Document** - Navigate to `/exsum/new` and upload your file (PDF, DOCX, TXT)
-2. **Select AI Model and Vector Database** - Choose your preferred LLM model and vector database
+2. **Select AI Model** - Choose your preferred LLM model
 3. **Generate Summary** - Click "Generate" to create the executive summary
 4. **Refine with Feedback** - Provide feedback and regenerate to improve the summary
 5. **Save and Manage Drafts** - Drafts are automatically saved with full version history
