@@ -103,30 +103,12 @@ pnpm dev
 
 ### Workflow
 
-1. **Upload Document**
-   - Navigate to `/exsum/new`
-   - Click "Upload Document" or drag-and-drop your file
-   - Supported formats: PDF, DOCX, TXT
-
-2. **Select AI Model and Vector Database**
-   - Choose your preferred LLM model from available options
-
-3. **Generate Summary**
-   - Click "Generate" to create the executive summary
-   - View generated content in real-time with markdown rendering
-
-4. **Refine with Feedback**
-   - Provide feedback on the generated summary
-   - Click "Regenerate" to create an improved version
-   - Compare versions side-by-side to track improvements
-
-5. **Save and Manage Drafts**
-   - Drafts are automatically saved to browser storage
-   - Access previous drafts from the sidebar
-   - Each draft maintains its full version history
-
-6. **Export Document**
-   - Click "Export to Word" to download a professionally formatted document
+1. **Upload Document** - Navigate to `/exsum/new` and upload your file (PDF, DOCX, TXT)
+2. **Select AI Model and Vector Database** - Choose your preferred LLM model and vector database
+3. **Generate Summary** - Click "Generate" to create the executive summary
+4. **Refine with Feedback** - Provide feedback and regenerate to improve the summary
+5. **Save and Manage Drafts** - Drafts are automatically saved with full version history
+6. **Export Document** - Download the summary as a Word document
 
 ### Building for Production
 ```bash
@@ -174,9 +156,6 @@ We welcome contributions to improve the ExSum Generator! Please see [CONTRIBUTIN
 
 ## Documentation
 
-### Additional Resources
-
-- **Comprehensive Documentation**: See `_PMO_Documentation.pptx` in the project root for detailed information
 - **SEMOSS SDK Documentation**: [https://semoss.org/docs](https://semoss.org/docs)
 - **Material UI Documentation**: [https://mui.com](https://mui.com)
 - **React Documentation**: [https://react.dev](https://react.dev)
@@ -205,3 +184,4 @@ This project is built using the following technologies:
 - **[pnpm](https://pnpm.io)** - Package manager
 
 ---
+
